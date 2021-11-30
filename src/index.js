@@ -1,21 +1,26 @@
-import "./index.css";
+import "assets/scss/material-kit-react.scss?v=1.10.0";
 
-import Amplify from "aws-amplify";
-import App from "./App";
+import { Route, Router, Switch } from "react-router-dom";
+
+// pages for this product
+import Components from "views/Components/Components.js";
+import LandingPage from "views/LandingPage/LandingPage.js";
+import LoginPage from "views/LoginPage/LoginPage.js";
+import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import React from "react";
 import ReactDOM from "react-dom";
-import config from "./aws-exports";
-import reportWebVitals from "./reportWebVitals";
+import { createBrowserHistory } from "history";
 
-Amplify.configure(config);
+var hist = createBrowserHistory();
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router history={hist}>
+    <Switch>
+      <Route path="/landing-page" component={LandingPage} />
+      <Route path="/about-yichao" component={ProfilePage} />
+      <Route path="/login-page" component={LoginPage} />
+      <Route path="/" component={Components} />
+    </Switch>
+  </Router>,
   document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
