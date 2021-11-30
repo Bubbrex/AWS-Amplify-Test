@@ -1,4 +1,3 @@
-import Button from "components/CustomButtons/Button.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -8,21 +7,9 @@ import Header from "components/Header/Header.js";
 // sections for this page
 import HeaderLinks from "components/Header/HeaderLinks.js";
 // react components for routing our app without refresh
-import { Link } from "react-router-dom";
 import Parallax from "components/Parallax/Parallax.js";
 import React from "react";
-import SectionBasics from "./Sections/SectionBasics.js";
 import SectionCarousel from "./Sections/SectionCarousel.js";
-import SectionCompletedExamples from "./Sections/SectionCompletedExamples.js";
-import SectionDownload from "./Sections/SectionDownload.js";
-import SectionExamples from "./Sections/SectionExamples.js";
-import SectionJavascript from "./Sections/SectionJavascript.js";
-import SectionLogin from "./Sections/SectionLogin.js";
-import SectionNavbars from "./Sections/SectionNavbars.js";
-import SectionNotifications from "./Sections/SectionNotifications.js";
-import SectionPills from "./Sections/SectionPills.js";
-import SectionTabs from "./Sections/SectionTabs.js";
-import SectionTypography from "./Sections/SectionTypography.js";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -55,7 +42,7 @@ export default function Components(props) {
               <div className={classes.brand}>
                 <h1 className={classes.title}>About Me.</h1>
                 <h3 className={classes.subtitle}>
-                  I'm a Mechanical Engineering graduate. I hope that this
+                  I am a Mechanical Engineering graduate. I hope that this
                   website helps you to know much more about me.
                 </h3>
               </div>
