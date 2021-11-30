@@ -17,7 +17,7 @@
     }
   },
   "auth": {
-    "awsamplifytest1f4a6487": {
+    "awsamplifytest5e07eab4": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
