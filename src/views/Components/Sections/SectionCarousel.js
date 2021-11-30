@@ -36,7 +36,7 @@ export default function SectionCarousel() {
           <GridItem>
             <div className={classes.title}>
               <h2 className={classes.title}>
-                Project - "Smart" Fuel for High &eta; and Low Emission
+                Project - &quot;Smart&quot; Fuel for High &eta; and Low Emission
                 Combustion
               </h2>
               <h5>MAY 2021</h5>
@@ -73,11 +73,11 @@ export default function SectionCarousel() {
           <GridItem xs={12} sm={12} md={4}>
             <div className={classes.typo}>
               <h5>
-                It is my dissertation project of my Master's degree in UCL. The
-                key point of the project is to dig the potential of the
+                It is my dissertation project of my Master&apos;s degree in UCL.
+                The key point of the project is to dig the potential of the
                 conventional ICEs. Although I have project experience related to
                 the EVs and I have to admit the fact that from an energy
-                prospective, EVs are indeed better than ICEs, I'm obsessed of
+                prospective, EVs are indeed better than ICEs, I am obsessed of
                 the beauty of designing engines and other mechanical parts.
                 Therefore, as a mechanical student, I was trying to looking for
                 the balance between ICEs and the environment.

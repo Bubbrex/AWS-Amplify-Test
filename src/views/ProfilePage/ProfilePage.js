@@ -102,14 +102,14 @@ export default function ProfilePage(props) {
               <h4>
                 I completed the undergraduate program in Automotive Engineering
                 in University of Windsor in Canada and travelled to UK pursing
-                the Master's degree in Mechanical Engineering in University
+                the Master&apos;s degree in Mechanical Engineering in University
                 College London. I accomplished the dissertation in September,
                 2021. I used to participate in Putnam Math Competition during my
                 undergraduate period and ranked 722 out of 4700 across North
-                America. I'm also keen on photographing, fencing (used to be an
-                elite in China), origami , coding, and travelling. I used to own
-                a 2019 Subaru WRX and I really missed the period when I was
-                driving to enjoy the view in Canada.
+                America. I&apos;m also keen on photographing, fencing (used to
+                be an elite in China), origami , coding, and travelling. I used
+                to own a 2019 Subaru WRX and I really missed the period when I
+                was driving to enjoy the view in Canada.
               </h4>
             </div>
             <GridContainer justify="center">
