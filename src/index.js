@@ -4,7 +4,7 @@ import Amplify from "aws-amplify";
 import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom";
-import config from "./src/aws-exports";
+import config from "./aws-exports";
 import reportWebVitals from "./reportWebVitals";
 
 Amplify.configure(config);
