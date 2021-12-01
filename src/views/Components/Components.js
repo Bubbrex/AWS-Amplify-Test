@@ -1,3 +1,5 @@
+import { Box, Typography } from "@mui/material";
+
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -39,13 +41,36 @@ export default function Components(props) {
         <div className={classes.container}>
           <GridContainer>
             <GridItem>
-              <div className={classes.brand}>
-                <h1 className={classes.title}>About Me.</h1>
-                <h3 className={classes.subtitle}>
+              <Box sx={{ textAlign: "right" }} className={classes.brand}>
+                <Typography
+                  // variant="h1"
+                  sx={{
+                    right: 0,
+                    fontSize: "4.2rem",
+                    fontWeight: "600",
+                    display: "inline-block",
+                    position: "relative",
+                  }}
+                  // className={classes.title}
+                >
+                  About Me.
+                </Typography>
+                <Typography
+                  // variant="h3"
+                  sx={{
+                    position: "absolute",
+                    right: 0,
+                    fontSize: "1.313rem",
+                    fontWeight: "300",
+                    maxWidth: "500px",
+                    margin: "10px 0 0",
+                  }}
+                  // className={classes.subtitle}
+                >
                   I am a Mechanical Engineering graduate. I hope that this
-                  website helps you to know much more about me.
-                </h3>
-              </div>
+                  website helps you to know much more about me
+                </Typography>
+              </Box>
             </GridItem>
           </GridContainer>
         </div>
