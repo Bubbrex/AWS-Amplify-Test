@@ -64,6 +64,8 @@ export default function Components(props) {
                     fontWeight: "300",
                     maxWidth: "500px",
                     margin: "10px 0 0",
+                    marginRight: "0.5rem",
+                    marginLeft: "0.5rem",
                   }}
                   // className={classes.subtitle}
                 >

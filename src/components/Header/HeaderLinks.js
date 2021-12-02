@@ -74,7 +74,7 @@ export default function HeaderLinks(props) {
             color="transparent"
             className={classes.navLink}
           >
-            <i className={classes.socialIcons + " fab fa-github"} />
+            <i className={classes.socialIcons + " fab fa-github"} /> Github
           </Button>
         </Tooltip>
       </ListItem>
@@ -92,6 +92,7 @@ export default function HeaderLinks(props) {
             className={classes.navLink}
           >
             <i className={classes.socialIcons + " fab fa-linkedin"} />
+            Linkedin
           </Button>
         </Tooltip>
       </ListItem>
@@ -109,6 +110,7 @@ export default function HeaderLinks(props) {
             className={classes.navLink}
           >
             <i className={classes.socialIcons + " fab fa-instagram"} />
+            Instagram
           </Button>
         </Tooltip>
       </ListItem>
