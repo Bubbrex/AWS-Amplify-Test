@@ -1,14 +1,13 @@
-import React from "react";
+import FormControl from "@material-ui/core/FormControl";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
+import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-
 import styles from "assets/jss/material-kit-react/components/customInputStyle.js";
 
 const useStyles = makeStyles(styles);
@@ -23,6 +22,8 @@ export default function CustomInput(props) {
     inputProps,
     error,
     white,
+    value,
+    onChange,
     inputRootCustomClasses,
     success,
   } = props;
@@ -72,6 +73,8 @@ export default function CustomInput(props) {
           underline: underlineClasses,
         }}
         id={id}
+        value={value}
+        onChange={onChange}
         {...inputProps}
       />
     </FormControl>
@@ -79,6 +82,8 @@ export default function CustomInput(props) {
 }
 
 CustomInput.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
   labelText: PropTypes.node,
   labelProps: PropTypes.object,
   id: PropTypes.string,

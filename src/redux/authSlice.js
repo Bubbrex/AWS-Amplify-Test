@@ -15,14 +15,14 @@ const initialState = authAdapter.getInitialState({
 
 export const SignUp = createAsyncThunk(
   "auth/signUp",
-  async ({ username, password, email, phone_number }) => {
+  async ({ username, password, email }) => {
     try {
       const response = await Auth.signUp({
         username,
         password,
         attributes: {
           email, // optional
-          phone_number, // optional - E.164 number convention
+          // optional - E.164 number convention
           // other custom attributes
         },
       });
