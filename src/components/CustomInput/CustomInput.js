@@ -21,6 +21,7 @@ export default function CustomInput(props) {
     labelProps,
     inputProps,
     error,
+    disabled,
     white,
     value,
     onChange,
@@ -72,6 +73,7 @@ export default function CustomInput(props) {
           disabled: classes.disabled,
           underline: underlineClasses,
         }}
+        disabled={disabled}
         id={id}
         value={value}
         onChange={onChange}
@@ -82,6 +84,7 @@ export default function CustomInput(props) {
 }
 
 CustomInput.propTypes = {
+  disabled: PropTypes.bool,
   value: PropTypes.string,
   onChange: PropTypes.func,
   labelText: PropTypes.node,

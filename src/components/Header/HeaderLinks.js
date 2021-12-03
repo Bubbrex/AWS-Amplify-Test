@@ -2,6 +2,7 @@
 // import { Apps, CloudDownload } from "@material-ui/icons";
 
 import Button from "components/CustomButtons/Button.js";
+import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 // core components
 // import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 // import DeleteIcon from "@material-ui/icons/Delete";
@@ -16,7 +17,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
-
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
@@ -111,6 +111,23 @@ export default function HeaderLinks(props) {
           >
             <i className={classes.socialIcons + " fab fa-instagram"} />
             Instagram
+          </Button>
+        </Tooltip>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Tooltip
+          id="signIn-tooltip"
+          title="Join me from HERE!"
+          placement={window.innerWidth > 959 ? "top" : "left"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color="transparent"
+            href="/login-page"
+            className={classes.navLink}
+          >
+            <CatchingPokemonIcon />
+            Sign In/Register
           </Button>
         </Tooltip>
       </ListItem>

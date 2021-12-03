@@ -1,6 +1,6 @@
 import "assets/scss/material-kit-react.scss?v=1.10.0";
 
-import { Route, Router, Switch } from "react-router-dom";
+import { Redirect, Route, Router, Switch } from "react-router-dom";
 
 import Amplify from "aws-amplify";
 // pages for this product
@@ -25,7 +25,9 @@ ReactDOM.render(
         <Route path="/landing-page" component={LandingPage} />
         <Route path="/about-yichao" component={ProfilePage} />
         <Route path="/login-page" component={LoginPage} />
-        <Route path="/" component={Components} />
+        <Route path="/home" component={Components} />
+        <Redirect from="/" to="/home" />
+        <Redirect to="/" />
       </Switch>
     </Router>
   </Provider>,

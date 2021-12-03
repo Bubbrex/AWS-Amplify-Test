@@ -1,5 +1,7 @@
+import { ConfirmSignUp, ResendConfirmationCode, SignUp } from "redux/authSlice";
 import { Controller, useForm } from "react-hook-form";
 
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -18,7 +20,6 @@ import Icon from "@material-ui/core/Icon";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import People from "@material-ui/icons/People";
 import React from "react";
-import { SignUp } from "redux/authSlice";
 import image from "assets/img/bg7.jpg";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -29,11 +30,14 @@ const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const dispatch = useDispatch();
+  const [submitted, setSubmitted] = React.useState(false);
+  const [code, setCode] = React.useState("");
   const [cardAnimation, setCardAnimation] = React.useState("cardHidden");
   const {
     handleSubmit,
     control,
     formState: { errors },
+    getValues,
   } = useForm({
     defaultValues: {
       username: "",
@@ -51,8 +55,10 @@ export default function LoginPage(props) {
     const signUpInfo = { ...data };
     console.log("check", signUpInfo);
     const response = await dispatch(SignUp(signUpInfo));
+    setSubmitted(true);
     console.log(response);
   };
+  console.log("check", getValues(["username"]));
 
   console.log(errors);
   return (
@@ -110,7 +116,7 @@ export default function LoginPage(props) {
                       </Button>
                     </div>
                   </CardHeader>
-                  <p className={classes.divider}>Or Be Classical</p>
+                  <p className={classes.divider}>Classically Register</p>
                   <CardBody>
                     <Controller
                       name="username"
@@ -125,6 +131,7 @@ export default function LoginPage(props) {
                           }`}
                           id="first"
                           value={value}
+                          disabled={submitted}
                           error={!!errors.username}
                           formControlProps={{
                             fullWidth: true,
@@ -134,6 +141,7 @@ export default function LoginPage(props) {
                             console.log(value);
                           }}
                           inputProps={{
+                            autoFocus: true,
                             type: "text",
                             endAdornment: (
                               <InputAdornment position="end">
@@ -156,6 +164,7 @@ export default function LoginPage(props) {
                             errors.email ? " is required!" : ""
                           }`}
                           id="email"
+                          disabled={submitted}
                           onChange={(e) => onChange(e)}
                           value={value}
                           error={!!errors.email}
@@ -172,7 +181,7 @@ export default function LoginPage(props) {
                           }}
                         />
                       )}
-                    />{" "}
+                    />
                     <Controller
                       name="password"
                       control={control}
@@ -186,6 +195,7 @@ export default function LoginPage(props) {
                           }`}
                           id="pass"
                           error={!!errors.password}
+                          disabled={submitted}
                           formControlProps={{
                             fullWidth: true,
                           }}
@@ -205,12 +215,59 @@ export default function LoginPage(props) {
                         />
                       )}
                     />
+                    {submitted ? (
+                      <React.Fragment>
+                        <CustomInput
+                          labelText="Confirmation Code"
+                          id="code"
+                          value={code}
+                          onChange={(e) => setCode(e.target.value)}
+                          formControlProps={{
+                            fullWidth: true,
+                          }}
+                          inputProps={{
+                            autoFocus: true,
+                            type: "code",
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                60s <AccessAlarmIcon />
+                              </InputAdornment>
+                            ),
+                            autoComplete: "off",
+                          }}
+                        />
+                        <Button
+                          onClick={() =>
+                            dispatch(
+                              ConfirmSignUp({
+                                username: getValues("username"),
+                                code: code,
+                              })
+                            )
+                          }
+                        >
+                          Submit
+                        </Button>
+                        <Button
+                          onClick={() =>
+                            dispatch(
+                              ResendConfirmationCode({
+                                username: getValues("username"),
+                              })
+                            )
+                          }
+                        >
+                          Resend
+                        </Button>
+                      </React.Fragment>
+                    ) : null}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     <Button
                       simple
                       color="primary"
                       size="lg"
+                      disabled={submitted}
                       onClick={handleSubmit(onSubmit)}
                     >
                       Get started
