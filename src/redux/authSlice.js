@@ -15,6 +15,10 @@ const initialState = authAdapter.getInitialState({
   confirmSignUpError: null,
   resendConfirmationCodeStatus: "idle",
   resendConfirmationCodeError: null,
+  signInStatus: "idle",
+  signInError: null,
+  signOutStatus: "idle",
+  signOutError: null,
 });
 
 export const SignUp = createAsyncThunk(
@@ -49,14 +53,35 @@ export const ConfirmSignUp = createAsyncThunk(
   }
 );
 
+export const SignOut = createAsyncThunk("auth/signOut", async () => {
+  try {
+    await Auth.signOut();
+  } catch (error) {
+    console.log("error signing out: ", error);
+  }
+});
+
 export const ResendConfirmationCode = createAsyncThunk(
   "auth/resendConfirmationCode",
-  async function resendConfirmationCode({ username }) {
+  async ({ username }) => {
     try {
       await Auth.resendSignUp(username);
       console.log("code resent successfully");
     } catch (err) {
       console.log("error resending code: ", err);
+    }
+  }
+);
+
+export const SignIn = createAsyncThunk(
+  "auth/signIn",
+  async ({ username, password }) => {
+    try {
+      const user = await Auth.signIn(username, password);
+      console.log("user", user);
+      return user;
+    } catch (error) {
+      console.log("error signing in", error);
     }
   }
 );
@@ -74,6 +99,7 @@ const authSlice = createSlice({
       })
       .addCase(SignUp.fulfilled, (state) => {
         state.signUpStatus = "succeeded";
+        console.log("sign up successfully");
         // authAdapter.addOne(state, action.payload);
       })
       .addCase(SignUp.rejected, (state, action) => {
@@ -103,6 +129,36 @@ const authSlice = createSlice({
       .addCase(ResendConfirmationCode.rejected, (state, action) => {
         state.resendConfirmationCodeStatus = "failed";
         state.resendConfirmationCodeError = action.error.message;
+      })
+      // Cases for signIn
+
+      .addCase(SignIn.pending, (state) => {
+        state.signInStatus = "loading";
+      })
+      .addCase(SignIn.fulfilled, (state) => {
+        state.signInStatus = "succeeded";
+        console.log("sign in successfully");
+
+        // authAdapter.addOne(state, action.payload);
+      })
+      .addCase(SignIn.rejected, (state, action) => {
+        state.signInStatus = "failed";
+        state.signInError = action.error.message;
+      })
+      // Cases for SignOut
+
+      .addCase(SignOut.pending, (state) => {
+        state.signOutStatus = "loading";
+      })
+      .addCase(SignOut.fulfilled, (state) => {
+        state.signOutStatus = "succeeded";
+        console.log("sign out successfully");
+
+        // authAdapter.addOne(state, action.payload);
+      })
+      .addCase(SignOut.rejected, (state, action) => {
+        state.signOutStatus = "failed";
+        state.signOutError = action.error.message;
       });
   },
 });

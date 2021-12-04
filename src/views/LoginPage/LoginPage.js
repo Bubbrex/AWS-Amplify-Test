@@ -1,4 +1,9 @@
-import { ConfirmSignUp, ResendConfirmationCode, SignUp } from "redux/authSlice";
+import {
+  ConfirmSignUp,
+  ResendConfirmationCode,
+  SignIn,
+  SignUp,
+} from "redux/authSlice";
 import { Controller, useForm } from "react-hook-form";
 
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
@@ -20,6 +25,7 @@ import Icon from "@material-ui/core/Icon";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import People from "@material-ui/icons/People";
 import React from "react";
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import image from "assets/img/bg7.jpg";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,6 +36,7 @@ const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const dispatch = useDispatch();
+  const [login, setLogin] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
   const [code, setCode] = React.useState("");
   const [cardAnimation, setCardAnimation] = React.useState("cardHidden");
@@ -52,11 +59,18 @@ export default function LoginPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   const onSubmit = async (data) => {
-    const signUpInfo = { ...data };
-    console.log("check", signUpInfo);
-    const response = await dispatch(SignUp(signUpInfo));
-    setSubmitted(true);
-    console.log(response);
+    if (login === false) {
+      const signUpInfo = { ...data };
+      console.log("check", signUpInfo);
+      const response = await dispatch(SignUp(signUpInfo));
+      setSubmitted(true);
+      console.log(response);
+    } else {
+      const signInInfo = { ...data };
+      console.log("check", signInInfo);
+      const response = await dispatch(SignIn(signInInfo));
+      console.log(response);
+    }
   };
   console.log("check", getValues(["username"]));
 
@@ -85,7 +99,15 @@ export default function LoginPage(props) {
               <Card className={classes[cardAnimation]}>
                 <form className={classes.form}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Login</h4>
+                    <Button
+                      simple
+                      color="transparent"
+                      size="lg"
+                      onClick={() => setLogin((prev) => !prev)}
+                    >
+                      <SwapHorizIcon />
+                      {login === false ? "Login" : "Register"}
+                    </Button>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
@@ -116,105 +138,191 @@ export default function LoginPage(props) {
                       </Button>
                     </div>
                   </CardHeader>
-                  <p className={classes.divider}>Classically Register</p>
+                  <p className={classes.divider}>
+                    {`Classically ${login === false ? "Register" : "Login"}`}
+                  </p>
                   <CardBody>
-                    <Controller
-                      name="username"
-                      control={control}
-                      rules={{
-                        required: true,
-                      }}
-                      render={({ field: { onChange, value } }) => (
-                        <CustomInput
-                          labelText={`Username${
-                            errors.username ? " is required!" : ""
-                          }`}
-                          id="first"
-                          value={value}
-                          disabled={submitted}
-                          error={!!errors.username}
-                          formControlProps={{
-                            fullWidth: true,
+                    {login === false ? (
+                      <React.Fragment>
+                        <Controller
+                          name="username"
+                          control={control}
+                          rules={{
+                            required: true,
                           }}
-                          onChange={(e) => {
-                            onChange(e);
-                            console.log(value);
-                          }}
-                          inputProps={{
-                            autoFocus: true,
-                            type: "text",
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <People className={classes.inputIconsColor} />
-                              </InputAdornment>
-                            ),
-                          }}
+                          render={({ field: { onChange, value } }) => (
+                            <CustomInput
+                              labelText={`Username${
+                                errors.username ? " is required!" : ""
+                              }`}
+                              id="first"
+                              value={value}
+                              disabled={submitted}
+                              error={!!errors.username}
+                              formControlProps={{
+                                fullWidth: true,
+                              }}
+                              onChange={(e) => {
+                                onChange(e);
+                                console.log(value);
+                              }}
+                              inputProps={{
+                                autoFocus: true,
+                                type: "text",
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <People
+                                      className={classes.inputIconsColor}
+                                    />
+                                  </InputAdornment>
+                                ),
+                              }}
+                            />
+                          )}
                         />
-                      )}
-                    />
-                    <Controller
-                      name="email"
-                      control={control}
-                      rules={{
-                        required: true,
-                      }}
-                      render={({ field: { onChange, value } }) => (
-                        <CustomInput
-                          labelText={`Email${
-                            errors.email ? " is required!" : ""
-                          }`}
-                          id="email"
-                          disabled={submitted}
-                          onChange={(e) => onChange(e)}
-                          value={value}
-                          error={!!errors.email}
-                          formControlProps={{
-                            fullWidth: true,
+                        <Controller
+                          name="email"
+                          control={control}
+                          rules={{
+                            required: true,
                           }}
-                          inputProps={{
-                            type: "email",
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <Email className={classes.inputIconsColor} />
-                              </InputAdornment>
-                            ),
-                          }}
+                          render={({ field: { onChange, value } }) => (
+                            <CustomInput
+                              labelText={`Email${
+                                errors.email ? " is required!" : ""
+                              }`}
+                              id="email"
+                              disabled={submitted}
+                              onChange={(e) => onChange(e)}
+                              value={value}
+                              error={!!errors.email}
+                              formControlProps={{
+                                fullWidth: true,
+                              }}
+                              inputProps={{
+                                type: "email",
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <Email
+                                      className={classes.inputIconsColor}
+                                    />
+                                  </InputAdornment>
+                                ),
+                              }}
+                            />
+                          )}
                         />
-                      )}
-                    />
-                    <Controller
-                      name="password"
-                      control={control}
-                      rules={{
-                        required: true,
-                      }}
-                      render={({ field: { onChange, value } }) => (
-                        <CustomInput
-                          labelText={`Password${
-                            errors.password !== undefined ? " is required" : ""
-                          }`}
-                          id="pass"
-                          error={!!errors.password}
-                          disabled={submitted}
-                          formControlProps={{
-                            fullWidth: true,
+                        <Controller
+                          name="password"
+                          control={control}
+                          rules={{
+                            required: true,
                           }}
-                          value={value}
-                          onChange={(e) => onChange(e)}
-                          inputProps={{
-                            type: "password",
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <Icon className={classes.inputIconsColor}>
-                                  lock_outline
-                                </Icon>
-                              </InputAdornment>
-                            ),
-                            autoComplete: "off",
-                          }}
+                          render={({ field: { onChange, value } }) => (
+                            <CustomInput
+                              labelText={`Password${
+                                errors.password !== undefined
+                                  ? " is required"
+                                  : ""
+                              }`}
+                              id="pass"
+                              error={!!errors.password}
+                              disabled={submitted}
+                              formControlProps={{
+                                fullWidth: true,
+                              }}
+                              value={value}
+                              onChange={(e) => onChange(e)}
+                              inputProps={{
+                                type: "password",
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <Icon className={classes.inputIconsColor}>
+                                      lock_outline
+                                    </Icon>
+                                  </InputAdornment>
+                                ),
+                                autoComplete: "off",
+                              }}
+                            />
+                          )}
                         />
-                      )}
-                    />
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <Controller
+                          name="username"
+                          control={control}
+                          rules={{
+                            required: true,
+                          }}
+                          render={({ field: { onChange, value } }) => (
+                            <CustomInput
+                              labelText={`Username${
+                                errors.username ? " is required!" : ""
+                              }`}
+                              id="first"
+                              value={value}
+                              disabled={submitted}
+                              error={!!errors.username}
+                              formControlProps={{
+                                fullWidth: true,
+                              }}
+                              onChange={(e) => {
+                                onChange(e);
+                                console.log(value);
+                              }}
+                              inputProps={{
+                                autoFocus: true,
+                                type: "text",
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <People
+                                      className={classes.inputIconsColor}
+                                    />
+                                  </InputAdornment>
+                                ),
+                              }}
+                            />
+                          )}
+                        />
+                        <Controller
+                          name="password"
+                          control={control}
+                          rules={{
+                            required: true,
+                          }}
+                          render={({ field: { onChange, value } }) => (
+                            <CustomInput
+                              labelText={`Password${
+                                errors.password !== undefined
+                                  ? " is required"
+                                  : ""
+                              }`}
+                              id="pass"
+                              error={!!errors.password}
+                              disabled={submitted}
+                              formControlProps={{
+                                fullWidth: true,
+                              }}
+                              value={value}
+                              onChange={(e) => onChange(e)}
+                              inputProps={{
+                                type: "password",
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <Icon className={classes.inputIconsColor}>
+                                      lock_outline
+                                    </Icon>
+                                  </InputAdornment>
+                                ),
+                                autoComplete: "off",
+                              }}
+                            />
+                          )}
+                        />
+                      </React.Fragment>
+                    )}
                     {submitted ? (
                       <React.Fragment>
                         <CustomInput

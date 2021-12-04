@@ -41,7 +41,7 @@ export default function Components(props) {
         <div className={classes.container}>
           <GridContainer>
             <GridItem>
-              <Box sx={{ textAlign: "right" }} className={classes.brand}>
+              <Box className={classes.brand}>
                 <Typography
                   // variant="h1"
                   sx={{

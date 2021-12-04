@@ -7,6 +7,14 @@ type Todo {
   updatedAt: AWSDateTime!
 }
 
+type User {
+  id: ID!
+  username: String!
+  email: AWSEmail!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
 input ModelStringInput {
   ne: String
   eq: String
@@ -115,6 +123,8 @@ input ModelTodoFilterInput {
 type Query {
   getTodo(id: ID!): Todo
   listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
 }
 
 input ModelTodoConditionInput {
@@ -145,11 +155,59 @@ type Mutation {
   createTodo(input: CreateTodoInput!, condition: ModelTodoConditionInput): Todo
   updateTodo(input: UpdateTodoInput!, condition: ModelTodoConditionInput): Todo
   deleteTodo(input: DeleteTodoInput!, condition: ModelTodoConditionInput): Todo
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
 }
 
 type Subscription {
   onCreateTodo: Todo @aws_subscribe(mutations: ["createTodo"])
   onUpdateTodo: Todo @aws_subscribe(mutations: ["updateTodo"])
   onDeleteTodo: Todo @aws_subscribe(mutations: ["deleteTodo"])
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+}
+
+type ModelUserConnection {
+  items: [User!]!
+  nextToken: String
+}
+
+input ModelUserFilterInput {
+  id: ModelIDInput
+  username: ModelStringInput
+  email: ModelStringInput
+  createdAt: ModelStringInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+input ModelUserConditionInput {
+  username: ModelStringInput
+  email: ModelStringInput
+  createdAt: ModelStringInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
+}
+
+input CreateUserInput {
+  id: ID
+  username: String!
+  email: AWSEmail!
+  createdAt: AWSDateTime
+}
+
+input UpdateUserInput {
+  id: ID!
+  username: String
+  email: AWSEmail
+  createdAt: AWSDateTime
+}
+
+input DeleteUserInput {
+  id: ID!
 }
 
