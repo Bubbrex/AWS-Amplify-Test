@@ -124,6 +124,7 @@ export default function HeaderLinks(props) {
           <Button
             color="transparent"
             href="/login-page"
+            disabled
             className={classes.navLink}
           >
             <CatchingPokemonIcon />
