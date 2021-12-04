@@ -21,7 +21,6 @@ function App() {
           <Route exact path="/login-page" component={LoginPage} />
           <Route exact path="/home" component={Components} />
           <Redirect from="/" to="/home" />
-          <Redirect to="/" />
         </Switch>
         <SnackbarContent
           message={
