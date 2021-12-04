@@ -1,7 +1,7 @@
 {
-  "name": "material-kit-react",
+  "name": "yichao-web",
   "version": "1.10.0",
-  "description": "Material Kit React. Coded by Creative Tim",
+  "description": "yichao's personal portfolio",
   "private": true,
   "main": "src/index.js",
   "dependencies": {

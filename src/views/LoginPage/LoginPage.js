@@ -31,11 +31,13 @@ import image from "assets/img/bg7.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [login, setLogin] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
   const [code, setCode] = React.useState("");
@@ -65,6 +67,7 @@ export default function LoginPage(props) {
       const response = await dispatch(SignUp(signUpInfo));
       setSubmitted(true);
       console.log(response);
+      history.push("/");
     } else {
       const signInInfo = { ...data };
       console.log("check", signInInfo);
@@ -72,9 +75,6 @@ export default function LoginPage(props) {
       console.log(response);
     }
   };
-  console.log("check", getValues(["username"]));
-
-  console.log(errors);
   return (
     <div>
       <Header

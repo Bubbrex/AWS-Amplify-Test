@@ -6,7 +6,9 @@ import {
 
 import { Auth } from "aws-amplify";
 
-const authAdapter = createEntityAdapter();
+const authAdapter = createEntityAdapter({
+  selectId: (user) => user.username,
+});
 
 const initialState = authAdapter.getInitialState({
   signUpStatus: "idle",
@@ -19,6 +21,8 @@ const initialState = authAdapter.getInitialState({
   signInError: null,
   signOutStatus: "idle",
   signOutError: null,
+  fetchCurrentUserStatus: "idle",
+  fetchCurrentUserError: null,
 });
 
 export const SignUp = createAsyncThunk(
@@ -73,6 +77,18 @@ export const ResendConfirmationCode = createAsyncThunk(
   }
 );
 
+export const FetchCurrentUser = createAsyncThunk(
+  "auth/fetchCurrentUser",
+  async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      return user;
+    } catch (err) {
+      console.log("error fetch current user: ", err);
+    }
+  }
+);
+
 export const SignIn = createAsyncThunk(
   "auth/signIn",
   async ({ username, password }) => {
@@ -97,10 +113,10 @@ const authSlice = createSlice({
       .addCase(SignUp.pending, (state) => {
         state.signUpStatus = "loading";
       })
-      .addCase(SignUp.fulfilled, (state) => {
+      .addCase(SignUp.fulfilled, (state, action) => {
         state.signUpStatus = "succeeded";
         console.log("sign up successfully");
-        // authAdapter.addOne(state, action.payload);
+        authAdapter.addOne(state, action.payload);
       })
       .addCase(SignUp.rejected, (state, action) => {
         state.signUpStatus = "failed";
@@ -135,11 +151,10 @@ const authSlice = createSlice({
       .addCase(SignIn.pending, (state) => {
         state.signInStatus = "loading";
       })
-      .addCase(SignIn.fulfilled, (state) => {
+      .addCase(SignIn.fulfilled, (state, action) => {
         state.signInStatus = "succeeded";
         console.log("sign in successfully");
-
-        // authAdapter.addOne(state, action.payload);
+        authAdapter.addOne(state, action.payload);
       })
       .addCase(SignIn.rejected, (state, action) => {
         state.signInStatus = "failed";
@@ -150,15 +165,27 @@ const authSlice = createSlice({
       .addCase(SignOut.pending, (state) => {
         state.signOutStatus = "loading";
       })
-      .addCase(SignOut.fulfilled, (state) => {
+      .addCase(SignOut.fulfilled, (state, action) => {
         state.signOutStatus = "succeeded";
         console.log("sign out successfully");
-
-        // authAdapter.addOne(state, action.payload);
+        authAdapter.removeOne(state, action.payload);
       })
       .addCase(SignOut.rejected, (state, action) => {
         state.signOutStatus = "failed";
         state.signOutError = action.error.message;
+      }) // Cases for fetchCurrentUser
+
+      .addCase(FetchCurrentUser.pending, (state) => {
+        state.fetchCurrentUserStatus = "loading";
+      })
+      .addCase(FetchCurrentUser.fulfilled, (state, action) => {
+        state.fetchCurrentUserStatus = "succeeded";
+        console.log("fetch user successfully");
+        authAdapter.addOne(state, action.payload);
+      })
+      .addCase(FetchCurrentUser.rejected, (state, action) => {
+        state.fetchCurrentUserStatus = "failed";
+        state.fetchCurrentUserError = action.error.message;
       });
   },
 });
