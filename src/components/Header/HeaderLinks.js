@@ -130,11 +130,10 @@ export default function HeaderLinks(props) {
           <Button
             color="transparent"
             href="/login-page"
-            disabled
             className={classes.navLink}
           >
             <CatchingPokemonIcon />
-            {currentUser ? currentUser : "Sign In/Register (Maintenance)"}
+            {currentUser ? currentUser : "Sign In/Register"}
           </Button>
         </Tooltip>
       </ListItem>
