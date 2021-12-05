@@ -40,8 +40,10 @@ export default function LoginPage(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const currentUser = useSelector((state) => state.auth.currentUser);
+  const signUpError = useSelector((state) => state.auth.signUpError);
   const [login, setLogin] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
+  const [codeError, setCodeError] = React.useState("");
   const [code, setCode] = React.useState("");
   const [cardAnimation, setCardAnimation] = React.useState("cardHidden");
   const {
@@ -75,7 +77,6 @@ export default function LoginPage(props) {
       const response = await dispatch(SignUp(signUpInfo));
       setSubmitted(true);
       console.log(response);
-      history.push("/");
     } else {
       const signInInfo = { ...data };
       console.log("check", signInInfo);
@@ -84,6 +85,20 @@ export default function LoginPage(props) {
       console.log(response);
     }
   };
+  const confirmSignUpStatus = async () => {
+    const response = await dispatch(
+      ConfirmSignUp({
+        username: getValues("username"),
+        code: code,
+      })
+    );
+    if (response.meta.requestStatus == "fulfilled") {
+      history.push("/");
+    } else if (response.meta.requestStatus == "rejected") {
+      setCodeError(response.error.message);
+    }
+  };
+
   return (
     <div>
       <Header
@@ -161,13 +176,14 @@ export default function LoginPage(props) {
                           }}
                           render={({ field: { onChange, value } }) => (
                             <CustomInput
+                              helpText={signUpError}
                               labelText={`Username${
                                 errors.username ? " is required!" : ""
                               }`}
                               id="first"
                               value={value}
-                              disabled={submitted}
-                              error={!!errors.username}
+                              disabled={submitted && signUpError == null}
+                              error={!!errors.username || signUpError !== null}
                               formControlProps={{
                                 fullWidth: true,
                               }}
@@ -256,6 +272,45 @@ export default function LoginPage(props) {
                             />
                           )}
                         />
+                        {submitted && signUpError == null ? (
+                          <React.Fragment>
+                            <CustomInput
+                              labelText="Confirmation Code"
+                              id="code"
+                              value={code}
+                              error={codeError !== ""}
+                              helpText={codeError}
+                              onChange={(e) => setCode(e.target.value)}
+                              formControlProps={{
+                                fullWidth: true,
+                              }}
+                              inputProps={{
+                                autoFocus: true,
+                                type: "code",
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    60s <AccessAlarmIcon />
+                                  </InputAdornment>
+                                ),
+                                autoComplete: "off",
+                              }}
+                            />
+                            <Button onClick={() => confirmSignUpStatus()}>
+                              Submit
+                            </Button>
+                            <Button
+                              onClick={() =>
+                                dispatch(
+                                  ResendConfirmationCode({
+                                    username: getValues("username"),
+                                  })
+                                )
+                              }
+                            >
+                              Resend
+                            </Button>
+                          </React.Fragment>
+                        ) : null}
                       </React.Fragment>
                     ) : (
                       <React.Fragment>
@@ -332,59 +387,13 @@ export default function LoginPage(props) {
                         />
                       </React.Fragment>
                     )}
-                    {submitted ? (
-                      <React.Fragment>
-                        <CustomInput
-                          labelText="Confirmation Code"
-                          id="code"
-                          value={code}
-                          onChange={(e) => setCode(e.target.value)}
-                          formControlProps={{
-                            fullWidth: true,
-                          }}
-                          inputProps={{
-                            autoFocus: true,
-                            type: "code",
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                60s <AccessAlarmIcon />
-                              </InputAdornment>
-                            ),
-                            autoComplete: "off",
-                          }}
-                        />
-                        <Button
-                          onClick={() =>
-                            dispatch(
-                              ConfirmSignUp({
-                                username: getValues("username"),
-                                code: code,
-                              })
-                            )
-                          }
-                        >
-                          Submit
-                        </Button>
-                        <Button
-                          onClick={() =>
-                            dispatch(
-                              ResendConfirmationCode({
-                                username: getValues("username"),
-                              })
-                            )
-                          }
-                        >
-                          Resend
-                        </Button>
-                      </React.Fragment>
-                    ) : null}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     <Button
                       simple
                       color="primary"
                       size="lg"
-                      disabled={submitted}
+                      disabled={submitted && signUpError == null}
                       onClick={handleSubmit(onSubmit)}
                     >
                       Get started

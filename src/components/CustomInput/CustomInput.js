@@ -1,4 +1,5 @@
 import FormControl from "@material-ui/core/FormControl";
+import { FormHelperText } from "@material-ui/core";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 // nodejs library to set properties for components
@@ -9,7 +10,6 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/components/customInputStyle.js";
-
 const useStyles = makeStyles(styles);
 
 export default function CustomInput(props) {
@@ -27,6 +27,7 @@ export default function CustomInput(props) {
     onChange,
     inputRootCustomClasses,
     success,
+    helpText = null,
   } = props;
 
   const labelClasses = classNames({
@@ -79,11 +80,14 @@ export default function CustomInput(props) {
         onChange={onChange}
         {...inputProps}
       />
+      {helpText ? <FormHelperText>{helpText}</FormHelperText> : null}
     </FormControl>
   );
 }
 
 CustomInput.propTypes = {
+  helpText: PropTypes.string,
+
   disabled: PropTypes.bool,
   value: PropTypes.string,
   onChange: PropTypes.func,

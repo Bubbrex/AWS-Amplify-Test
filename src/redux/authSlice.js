@@ -46,7 +46,9 @@ export const SignUp = createAsyncThunk(
 export const ConfirmSignUp = createAsyncThunk(
   "auth/confirmSignUp",
   async ({ username, code }) => {
-    await Auth.confirmSignUp(username, code);
+    const response = await Auth.confirmSignUp(username, code);
+    console.log("response", response);
+    return response;
   }
 );
 
@@ -93,7 +95,8 @@ const authSlice = createSlice({
       .addCase(SignUp.fulfilled, (state, action) => {
         state.signUpStatus = "succeeded";
         console.log("sign up successfully");
-        authAdapter.addOne(state, action.payload);
+        authAdapter.addOne(state, action.payload.user);
+        state.signUpError = null;
       })
       .addCase(SignUp.rejected, (state, action) => {
         state.signUpStatus = "failed";
@@ -106,6 +109,7 @@ const authSlice = createSlice({
       })
       .addCase(ConfirmSignUp.fulfilled, (state) => {
         state.confirmSignUpStatus = "succeeded";
+        state.currentUser = state.ids[0];
       })
       .addCase(ConfirmSignUp.rejected, (state, action) => {
         state.confirmSignUpStatus = "failed";
