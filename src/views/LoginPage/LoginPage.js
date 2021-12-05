@@ -5,6 +5,7 @@ import {
   SignUp,
 } from "redux/authSlice";
 import { Controller, useForm } from "react-hook-form";
+import React, { useEffect } from "react";
 
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import Button from "components/CustomButtons/Button.js";
@@ -24,7 +25,6 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Icon from "@material-ui/core/Icon";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import People from "@material-ui/icons/People";
-import React from "react";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import image from "assets/img/bg7.jpg";
 // @material-ui/core components
@@ -32,12 +32,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const currentUser = useSelector((state) => state.auth.currentUser);
   const [login, setLogin] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
   const [code, setCode] = React.useState("");
@@ -54,6 +56,12 @@ export default function LoginPage(props) {
       email: "",
     },
   });
+
+  useEffect(() => {
+    if (currentUser !== null) {
+      history.push("/");
+    }
+  }, [currentUser]);
 
   setTimeout(function () {
     setCardAnimation("");
@@ -72,6 +80,7 @@ export default function LoginPage(props) {
       const signInInfo = { ...data };
       console.log("check", signInInfo);
       const response = await dispatch(SignIn(signInInfo));
+      history.push("/");
       console.log(response);
     }
   };

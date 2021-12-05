@@ -11,16 +11,22 @@ import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 // import { Link } from "react-router-dom";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import LogoutIcon from "@mui/icons-material/Logout";
 /*eslint-disable*/
 import React from "react";
+import { SignOut } from "../../redux/authSlice";
 import Tooltip from "@material-ui/core/Tooltip";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.auth.currentUser);
   return (
     <List className={classes.list}>
       {/* <ListItem className={classes.listItem}>
@@ -128,10 +134,30 @@ export default function HeaderLinks(props) {
             className={classes.navLink}
           >
             <CatchingPokemonIcon />
-            Sign In/Register (Maintenance)
+            {currentUser ? currentUser : "Sign In/Register (Maintenance)"}
           </Button>
         </Tooltip>
       </ListItem>
+      {currentUser ? (
+        <ListItem className={classes.listItem}>
+          <Tooltip
+            id="signOut-tooltip"
+            title="Hope to see you soon!"
+            placement={window.innerWidth > 959 ? "top" : "left"}
+            classes={{ tooltip: classes.tooltip }}
+          >
+            <Button
+              color="transparent"
+              // href="/login-page"
+              className={classes.navLink}
+              onClick={() => dispatch(SignOut())}
+            >
+              <LogoutIcon />
+              Logout
+            </Button>
+          </Tooltip>
+        </ListItem>
+      ) : null}
     </List>
   );
 }

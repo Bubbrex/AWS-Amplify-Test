@@ -23,82 +23,59 @@ const initialState = authAdapter.getInitialState({
   signOutError: null,
   fetchCurrentUserStatus: "idle",
   fetchCurrentUserError: null,
+  currentUser: null,
 });
 
 export const SignUp = createAsyncThunk(
   "auth/signUp",
   async ({ username, password, email }) => {
-    try {
-      const response = await Auth.signUp({
-        username,
-        password,
-        attributes: {
-          email, // optional
-          // optional - E.164 number convention
-          // other custom attributes
-        },
-      });
-      console.log(response);
-      return response;
-    } catch (error) {
-      console.log("error signing up:", error);
-    }
+    const response = await Auth.signUp({
+      username,
+      password,
+      attributes: {
+        email, // optional
+        // optional - E.164 number convention
+        // other custom attributes
+      },
+    });
+    console.log(response);
+    return response;
   }
 );
 
 export const ConfirmSignUp = createAsyncThunk(
   "auth/confirmSignUp",
   async ({ username, code }) => {
-    try {
-      await Auth.confirmSignUp(username, code);
-    } catch (error) {
-      console.log("error confirming sign up", error);
-    }
+    await Auth.confirmSignUp(username, code);
   }
 );
 
 export const SignOut = createAsyncThunk("auth/signOut", async () => {
-  try {
-    await Auth.signOut();
-  } catch (error) {
-    console.log("error signing out: ", error);
-  }
+  await Auth.signOut();
 });
 
 export const ResendConfirmationCode = createAsyncThunk(
   "auth/resendConfirmationCode",
   async ({ username }) => {
-    try {
-      await Auth.resendSignUp(username);
-      console.log("code resent successfully");
-    } catch (err) {
-      console.log("error resending code: ", err);
-    }
+    await Auth.resendSignUp(username);
+    console.log("code resent successfully");
   }
 );
 
 export const FetchCurrentUser = createAsyncThunk(
   "auth/fetchCurrentUser",
   async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      return user;
-    } catch (err) {
-      console.log("error fetch current user: ", err);
-    }
+    const user = await Auth.currentAuthenticatedUser();
+    return user;
   }
 );
 
 export const SignIn = createAsyncThunk(
   "auth/signIn",
   async ({ username, password }) => {
-    try {
-      const user = await Auth.signIn(username, password);
-      console.log("user", user);
-      return user;
-    } catch (error) {
-      console.log("error signing in", error);
-    }
+    const user = await Auth.signIn(username, password);
+    console.log("user", user);
+    return user;
   }
 );
 
@@ -153,8 +130,9 @@ const authSlice = createSlice({
       })
       .addCase(SignIn.fulfilled, (state, action) => {
         state.signInStatus = "succeeded";
-        console.log("sign in successfully");
         authAdapter.addOne(state, action.payload);
+        state.currentUser = action.payload.username;
+        console.log("sign in successfully");
       })
       .addCase(SignIn.rejected, (state, action) => {
         state.signInStatus = "failed";
@@ -165,10 +143,11 @@ const authSlice = createSlice({
       .addCase(SignOut.pending, (state) => {
         state.signOutStatus = "loading";
       })
-      .addCase(SignOut.fulfilled, (state, action) => {
+      .addCase(SignOut.fulfilled, (state) => {
         state.signOutStatus = "succeeded";
+        authAdapter.removeAll(state);
+        state.currentUser = null;
         console.log("sign out successfully");
-        authAdapter.removeOne(state, action.payload);
       })
       .addCase(SignOut.rejected, (state, action) => {
         state.signOutStatus = "failed";
@@ -180,12 +159,14 @@ const authSlice = createSlice({
       })
       .addCase(FetchCurrentUser.fulfilled, (state, action) => {
         state.fetchCurrentUserStatus = "succeeded";
-        console.log("fetch user successfully");
         authAdapter.addOne(state, action.payload);
+        state.currentUser = action.payload.username;
+        console.log("fetch user successfully");
       })
       .addCase(FetchCurrentUser.rejected, (state, action) => {
         state.fetchCurrentUserStatus = "failed";
         state.fetchCurrentUserError = action.error.message;
+        state.currentUser = null;
       });
   },
 });
