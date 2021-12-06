@@ -24,14 +24,14 @@ import studio1 from "assets/img/examples/studio-1.jpg";
 import studio2 from "assets/img/examples/studio-2.jpg";
 import studio3 from "assets/img/examples/studio-3.jpg";
 import studio4 from "assets/img/examples/studio-4.png";
-import studio5 from "assets/img/examples/studio-5.PNG";
+import studio5 from "assets/img/examples/studio-5.png";
 import { styled } from "@mui/material/styles";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { useSelector } from "react-redux";
-import work1 from "assets/img/examples/work1.JPG";
+import work1 from "assets/img/examples/work1.jpg";
 import work2 from "assets/img/examples/work2.jpg";
 import work3 from "assets/img/examples/work3.jpg";
-import work4 from "assets/img/examples/work4.JPG";
+import work4 from "assets/img/examples/work4.jpg";
 import work5 from "assets/img/examples/work5.jpg";
 
 const useStyles = makeStyles(styles);
