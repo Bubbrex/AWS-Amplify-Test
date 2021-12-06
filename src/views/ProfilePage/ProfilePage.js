@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Button from "components/CustomButtons/Button.js";
 // @material-ui/icons
 import Camera from "@material-ui/icons/Camera";
@@ -12,33 +13,59 @@ import NavPills from "components/NavPills/NavPills.js";
 import Palette from "@material-ui/icons/Palette";
 import Parallax from "components/Parallax/Parallax.js";
 import React from "react";
+import Storage from "@aws-amplify/storage";
 // nodejs library that concatenates classes
 import classNames from "classnames";
+import cv from "../../yichao_ma_cv.pdf";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import profile from "assets/img/faces/selfie.jpg";
 import studio1 from "assets/img/examples/studio-1.jpg";
 import studio2 from "assets/img/examples/studio-2.jpg";
 import studio3 from "assets/img/examples/studio-3.jpg";
-// import studio4 from "assets/img/examples/studio-4.png";
+import studio4 from "assets/img/examples/studio-4.png";
 import studio5 from "assets/img/examples/studio-5.PNG";
+import { styled } from "@mui/material/styles";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import work1 from "assets/img/examples/olu-eletu.jpg";
-import work2 from "assets/img/examples/clem-onojeghuo.jpg";
-import work3 from "assets/img/examples/cynthia-del-rio.jpg";
-import work4 from "assets/img/examples/mariya-georgieva.jpg";
-import work5 from "assets/img/examples/clem-onojegaw.jpg";
+import { useSelector } from "react-redux";
+import work1 from "assets/img/examples/work1.JPG";
+import work2 from "assets/img/examples/work2.jpg";
+import work3 from "assets/img/examples/work3.jpg";
+import work4 from "assets/img/examples/work4.JPG";
+import work5 from "assets/img/examples/work5.jpg";
+
 const useStyles = makeStyles(styles);
+const Input = styled("input")({ display: "none" });
 
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
+  const currentUser = useSelector((state) => state.auth.currentUser);
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
   );
+  const [url, setUrl] = React.useState("");
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+  const uploadFile = async (e) => {
+    const file = e.target.files[0];
+    console.log(e);
+    const result = await Storage.put(`${currentUser}/image0`, file, {
+      level: "public",
+      contentType: "image/*",
+    });
+    console.log("upload successfully!", result);
+  };
+  const getImages = async () => {
+    const result = await Storage.get("test", {
+      level: "public",
+      download: false,
+      expires: 120,
+    });
+    console.log(result);
+    setUrl(result);
+  };
   return (
     <div>
       <Header
@@ -109,9 +136,28 @@ export default function ProfilePage(props) {
                 America. I&apos;m also keen on photographing, fencing (used to
                 be an elite in China), origami , coding, and travelling. I used
                 to own a 2019 Subaru WRX and I really missed the period when I
-                was driving to enjoy the view in Canada.
+                was driving to enjoy the view in Canada. Check out my{" "}
+                <a href={cv} target="blank">
+                  {" "}
+                  CV{" "}
+                </a>{" "}
+                for more about my experience
               </h4>
             </div>
+            <Box sx={{ display: "none" }}>
+              <label htmlFor="contained-button-file">
+                <Input
+                  accept="image/*"
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                  onChange={(e) => uploadFile(e)}
+                />
+                <Button component="span">Upload</Button>
+              </label>
+              <Button onClick={() => getImages()}>get images</Button>
+            </Box>
+            {url !== "" ? <img src={url} /> : null}
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
                 <NavPills
@@ -195,7 +241,7 @@ export default function ProfilePage(props) {
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={work4}
+                              src={studio4}
                               className={navImageClasses}
                             />
                             <img
@@ -207,17 +253,12 @@ export default function ProfilePage(props) {
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
+                              src={work4}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
                               src={work2}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={work1}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={studio1}
                               className={navImageClasses}
                             />
                           </GridItem>

@@ -1,0 +1,13 @@
+{
+  "resourceName": "yichaoStorage",
+  "policyUUID": "86998093",
+  "bucketName": "awsamplifytest45f20f5985c240c09b87fce46e96bc1c",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

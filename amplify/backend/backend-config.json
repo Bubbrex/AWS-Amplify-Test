@@ -41,5 +41,12 @@
         ]
       }
     }
+  },
+  "storage": {
+    "yichaoStorage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }
