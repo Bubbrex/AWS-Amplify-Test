@@ -61,7 +61,7 @@ export default function LoginPage(props) {
 
   useEffect(() => {
     if (currentUser !== null) {
-      history.push("/");
+      history.push("/home");
     }
   }, [currentUser]);
 
@@ -81,7 +81,7 @@ export default function LoginPage(props) {
       const signInInfo = { ...data };
       console.log("check", signInInfo);
       const response = await dispatch(SignIn(signInInfo));
-      history.push("/");
+      history.push("/home");
       console.log(response);
     }
   };
