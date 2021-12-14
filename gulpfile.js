@@ -30,7 +30,7 @@ gulp.task("licenses", async function () {
     .src("build/index.html", { base: "./" })
     .pipe(
       gap.prependText(`<!--
-
+      
 =========================================================
 * Material Kit React - v1.10.0
 =========================================================
