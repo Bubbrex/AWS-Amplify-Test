@@ -297,7 +297,7 @@ export default function SectionCarousel() {
                 were create when I was working on the Electric Vehicle Research.
                 The last image showed the Ford motor we worked with. These files
                 was confidential at the period I was in the project team.
-                Copyright reserved.
+                Copyright reserved by yichao.
               </h5>
             </div>
           </GridItem>
