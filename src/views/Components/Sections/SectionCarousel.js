@@ -311,8 +311,8 @@ export default function SectionCarousel() {
             <ReactPlayer
               url="https://youtu.be/8hO0Dyn0ym0"
               controls
-              height="379px"
-              width="730px"
+              height="400px"
+              width="100%"
             />
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
