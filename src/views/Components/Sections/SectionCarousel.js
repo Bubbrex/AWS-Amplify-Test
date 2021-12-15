@@ -6,6 +6,8 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import React from "react";
 import ReactPlayer from "react-player";
+import cad1 from "assets/img/cad2.png";
+import cad2 from "assets/img/cad1.png";
 import car1 from "assets/img/car1.png";
 import car2 from "assets/img/car2.png";
 import car3 from "assets/img/car3.png";
@@ -244,6 +246,7 @@ export default function SectionCarousel() {
               </h5>
             </div>
           </GridItem>
+
           <GridItem>
             <div className={classes.title}>
               <h2 className={classes.title}>
@@ -285,6 +288,69 @@ export default function SectionCarousel() {
                 and fashion styling. Although for now, I am not capable of
                 fabricating it, I believe that someday in the near future, the
                 dream car would not be JUST a dream!
+              </h5>
+            </div>
+          </GridItem>
+
+          <GridItem>
+            <div className={classes.title}>
+              <h2 className={classes.title}>Other CAD Drawings and Designs</h2>
+              <h5>SEP 2018</h5>
+            </div>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
+            <Card carousel>
+              <Carousel {...settings}>
+                <div>
+                  <img
+                    src={cad1}
+                    alt="First slide"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">{/* <h4>Front</h4> */}</div>
+                </div>
+                <div>
+                  <img
+                    src={cad2}
+                    alt="Second slide"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">{/* <h4>Side</h4> */}</div>
+                </div>
+              </Carousel>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={4}>
+            <div className={classes.typo}>
+              <h5>
+                Other CAD drawings and designs includes using
+                <a href="https://www.solidworks.com/" target="blank">
+                  {" "}
+                  SolidWorks{" "}
+                </a>
+                and{" "}
+                <a
+                  href="https://www.3ds.com/products-services/catia/"
+                  target="blank"
+                >
+                  {" "}
+                  CATIA{" "}
+                </a>
+                Although these drawings may look like complicated the first
+                peek, they are basically the combination (assembly) of various
+                small pieces.
               </h5>
             </div>
           </GridItem>
