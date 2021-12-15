@@ -9,6 +9,10 @@ import ReactPlayer from "react-player";
 import car1 from "assets/img/car1.png";
 import car2 from "assets/img/car2.png";
 import car3 from "assets/img/car3.png";
+import engine1 from "assets/img/engine1.jpg";
+import engine2 from "assets/img/engine2.jpg";
+import engine3 from "assets/img/engine3.jpg";
+import engine4 from "assets/img/engine4.jpg";
 // @material-ui/icons
 import image1 from "assets/img/efficiency1.png";
 import image2 from "assets/img/pressure using nhexane 1000RPM 0.75mol fueltot.png";
@@ -54,7 +58,17 @@ export default function SectionCarousel() {
             <Card carousel>
               <Carousel {...settings}>
                 <div>
-                  <img src={image1} alt="First slide" className="slick-image" />
+                  <img
+                    src={image1}
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    alt="First slide"
+                    className="slick-image"
+                  />
                   <div className="slick-caption">
                     {/* <h4>Efficiency plot</h4> */}
                   </div>
@@ -64,13 +78,31 @@ export default function SectionCarousel() {
                     src={image2}
                     alt="Second slide"
                     className="slick-image"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      width: "80%",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
                   />
                   <div className="slick-caption">
                     {/* <h4>Pressure plot</h4> */}
                   </div>
                 </div>
                 <div>
-                  <img src={image3} alt="Third slide" className="slick-image" />
+                  <img
+                    src={image3}
+                    alt="Third slide"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      width: "80%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
                   <div className="slick-caption">
                     {/* <h4>AHRR plot</h4> */}
                   </div>
@@ -256,6 +288,95 @@ export default function SectionCarousel() {
               </h5>
             </div>
           </GridItem>
+
+          <GridItem>
+            <div className={classes.title}>
+              <h2 className={classes.title}>Practices on Automotive Parts</h2>
+              <h5>SEP 2019</h5>
+            </div>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
+            <Card carousel>
+              <Carousel {...settings} display="flex">
+                <div>
+                  <img
+                    src={engine1}
+                    alt="First slide"
+                    height="350px"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">{/* <h4>Front</h4> */}</div>
+                </div>
+                <div>
+                  <img
+                    src={engine2}
+                    alt="Second slide"
+                    height="350px"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">{/* <h4>Side</h4> */}</div>
+                </div>
+                <div>
+                  <img
+                    src={engine3}
+                    alt="Third slide"
+                    height="350px"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">{/* <h4>Back</h4> */}</div>
+                </div>
+                <div>
+                  <img
+                    src={engine4}
+                    alt="Forth slide"
+                    height="350px"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">{/* <h4>Back</h4> */}</div>
+                </div>
+              </Carousel>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={4}>
+            <div className={classes.typo}>
+              <h5>
+                This is one of the most excited coursework I have ever worked
+                with in my undergraduate program which is to dissemble a
+                one-cylinder engine and reassemble it back according to the
+                manual. This is really a get-hands-dirty exercise but it is
+                definitely one of the best experience as an automotive
+                engineering student. The second part of the coursework is to use
+                given lego pieces to build a &quot;sports&quot; car. The
+                interesting parts of it was the gearbox design and the rack and
+                pinion steering system.
+              </h5>
+            </div>
+          </GridItem>
+
           <GridItem>
             <div className={classes.title}>
               <h2 className={classes.title}>
@@ -268,23 +389,59 @@ export default function SectionCarousel() {
             <Card carousel>
               <Carousel {...settings}>
                 <div>
-                  <img src={motor1} alt="First slide" className="slick-image" />
+                  <img
+                    src={motor1}
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    alt="First slide"
+                    className="slick-image"
+                  />
                   <div className="slick-caption">{/* <h4>Front</h4> */}</div>
                 </div>
                 <div>
                   <img
                     src={motor2}
                     alt="Second slide"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
                     className="slick-image"
                   />
                   <div className="slick-caption">{/* <h4>Side</h4> */}</div>
                 </div>
                 <div>
-                  <img src={motor3} alt="Third slide" className="slick-image" />
+                  <img
+                    src={motor3}
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    alt="Third slide"
+                    className="slick-image"
+                  />
                   <div className="slick-caption">{/* <h4>Back</h4> */}</div>
                 </div>
                 <div>
-                  <img src={motor4} alt="Forth slide" className="slick-image" />
+                  <img
+                    src={motor4}
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    alt="Forth slide"
+                    className="slick-image"
+                  />
                   <div className="slick-caption">{/* <h4>Back</h4> */}</div>
                 </div>
               </Carousel>
