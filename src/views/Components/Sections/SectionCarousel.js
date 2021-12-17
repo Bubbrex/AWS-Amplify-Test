@@ -534,6 +534,7 @@ export default function SectionCarousel() {
             <ReactPlayer
               url="https://youtu.be/8hO0Dyn0ym0"
               controls
+              alt="maybe not available in your region"
               height="400px"
               width="100%"
             />
