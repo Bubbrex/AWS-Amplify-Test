@@ -15,6 +15,23 @@ type User {
   updatedAt: AWSDateTime!
 }
 
+type Item {
+  orderId: ID!
+  status: Status!
+  customerID: ID!
+  amount: Int!
+  createdAt: AWSDateTime!
+  name: String!
+  updatedAt: AWSDateTime!
+}
+
+enum Status {
+  DELIVERED
+  IN_TRANSIT
+  PENDING
+  UNKNOWN
+}
+
 input ModelStringInput {
   ne: String
   eq: String
@@ -107,7 +124,7 @@ enum ModelSortDirection {
 }
 
 type ModelTodoConnection {
-  items: [Todo!]!
+  items: [Todo]!
   nextToken: String
 }
 
@@ -125,6 +142,8 @@ type Query {
   listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
   getUser(id: ID!): User
   listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getItem(orderId: ID!, amount: Int!): Item
+  listItems(orderId: ID, amount: ModelIntKeyConditionInput, filter: ModelItemFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelItemConnection
 }
 
 input ModelTodoConditionInput {
@@ -158,6 +177,9 @@ type Mutation {
   createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
   updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
   deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
+  createItem(input: CreateItemInput!, condition: ModelItemConditionInput): Item
+  updateItem(input: UpdateItemInput!, condition: ModelItemConditionInput): Item
+  deleteItem(input: DeleteItemInput!, condition: ModelItemConditionInput): Item
 }
 
 type Subscription {
@@ -167,10 +189,13 @@ type Subscription {
   onCreateUser: User @aws_subscribe(mutations: ["createUser"])
   onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
   onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+  onCreateItem: Item @aws_subscribe(mutations: ["createItem"])
+  onUpdateItem: Item @aws_subscribe(mutations: ["updateItem"])
+  onDeleteItem: Item @aws_subscribe(mutations: ["deleteItem"])
 }
 
 type ModelUserConnection {
-  items: [User!]!
+  items: [User]!
   nextToken: String
 }
 
@@ -209,5 +234,84 @@ input UpdateUserInput {
 
 input DeleteUserInput {
   id: ID!
+}
+
+type ModelItemConnection {
+  items: [Item]!
+  nextToken: String
+}
+
+input ModelStatusInput {
+  eq: Status
+  ne: Status
+}
+
+input ModelItemFilterInput {
+  orderId: ModelIDInput
+  status: ModelStatusInput
+  customerID: ModelIDInput
+  amount: ModelIntInput
+  createdAt: ModelStringInput
+  name: ModelStringInput
+  and: [ModelItemFilterInput]
+  or: [ModelItemFilterInput]
+  not: ModelItemFilterInput
+}
+
+input ModelItemConditionInput {
+  status: ModelStatusInput
+  customerID: ModelIDInput
+  createdAt: ModelStringInput
+  name: ModelStringInput
+  and: [ModelItemConditionInput]
+  or: [ModelItemConditionInput]
+  not: ModelItemConditionInput
+}
+
+input CreateItemInput {
+  orderId: ID!
+  status: Status!
+  customerID: ID!
+  amount: Int!
+  createdAt: AWSDateTime
+  name: String!
+}
+
+input UpdateItemInput {
+  orderId: ID!
+  status: Status
+  customerID: ID
+  amount: Int!
+  createdAt: AWSDateTime
+  name: String
+}
+
+input DeleteItemInput {
+  orderId: ID!
+  amount: Int!
+}
+
+input ModelIntKeyConditionInput {
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelItemByCustomerByStatusByCreatedAtCompositeKeyConditionInput {
+  eq: ModelItemByCustomerByStatusByCreatedAtCompositeKeyInput
+  le: ModelItemByCustomerByStatusByCreatedAtCompositeKeyInput
+  lt: ModelItemByCustomerByStatusByCreatedAtCompositeKeyInput
+  ge: ModelItemByCustomerByStatusByCreatedAtCompositeKeyInput
+  gt: ModelItemByCustomerByStatusByCreatedAtCompositeKeyInput
+  between: [ModelItemByCustomerByStatusByCreatedAtCompositeKeyInput]
+  beginsWith: ModelItemByCustomerByStatusByCreatedAtCompositeKeyInput
+}
+
+input ModelItemByCustomerByStatusByCreatedAtCompositeKeyInput {
+  status: Status
+  createdAt: String
 }
 

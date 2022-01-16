@@ -59,3 +59,46 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
+export const getItem = /* GraphQL */ `
+  query GetItem($orderId: ID!, $amount: Int!) {
+    getItem(orderId: $orderId, amount: $amount) {
+      orderId
+      status
+      customerID
+      amount
+      createdAt
+      name
+      updatedAt
+    }
+  }
+`;
+export const listItems = /* GraphQL */ `
+  query ListItems(
+    $orderId: ID
+    $amount: ModelIntKeyConditionInput
+    $filter: ModelItemFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listItems(
+      orderId: $orderId
+      amount: $amount
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        orderId
+        status
+        customerID
+        amount
+        createdAt
+        name
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

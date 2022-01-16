@@ -67,3 +67,42 @@ export const onDeleteUser = /* GraphQL */ `
     }
   }
 `;
+export const onCreateItem = /* GraphQL */ `
+  subscription OnCreateItem {
+    onCreateItem {
+      orderId
+      status
+      customerID
+      amount
+      createdAt
+      name
+      updatedAt
+    }
+  }
+`;
+export const onUpdateItem = /* GraphQL */ `
+  subscription OnUpdateItem {
+    onUpdateItem {
+      orderId
+      status
+      customerID
+      amount
+      createdAt
+      name
+      updatedAt
+    }
+  }
+`;
+export const onDeleteItem = /* GraphQL */ `
+  subscription OnDeleteItem {
+    onDeleteItem {
+      orderId
+      status
+      customerID
+      amount
+      createdAt
+      name
+      updatedAt
+    }
+  }
+`;
