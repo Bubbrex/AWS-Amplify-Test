@@ -30,12 +30,12 @@
         "GraphQLAPIEndpointOutput": "https://4eyfqqlyvvewrc6wta6oyva6sq.appsync-api.us-east-2.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-hi5xcqtpgfh55lcfqpkraizueq"
       },
-      "lastPushTimeStamp": "2022-01-16T02:03:54.268Z",
+      "lastPushTimeStamp": "2022-01-17T00:40:02.259Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-awsamplifytest-dev-184216-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiawsamplifytest"
       },
-      "lastPushDirHash": "f9R/2pKCB+C2LHyBTtYH3AnJpm8="
+      "lastPushDirHash": "3RzqmDEbsICxTaFUHSTyrpqAvZ4="
     }
   },
   "auth": {
@@ -71,7 +71,7 @@
         "IdentityPoolName": "awsamplifytest5e07eab4_identitypool_5e07eab4__dev",
         "UserPoolName": "awsamplifytest5e07eab4_userpool_5e07eab4"
       },
-      "lastPushTimeStamp": "2022-01-16T01:31:34.638Z",
+      "lastPushTimeStamp": "2022-01-17T00:40:00.691Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-awsamplifytest-dev-184216-deployment/amplify-cfn-templates/auth/awsamplifytest5e07eab4-cloudformation-template.json",
         "logicalId": "authawsamplifytest5e07eab4"
@@ -88,7 +88,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-awsamplifytest-dev-184216-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storageyichaoStorage"
       },
-      "lastPushTimeStamp": "2022-01-16T01:56:09.687Z",
+      "lastPushTimeStamp": "2022-01-17T00:40:00.693Z",
       "output": {
         "BucketName": "awsamplifytest45f20f5985c240c09b87fce46e96bc1c184216-dev",
         "Region": "us-east-2"

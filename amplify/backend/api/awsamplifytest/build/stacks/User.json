@@ -1457,6 +1457,14 @@
           ]
         }
       }
+    },
+    "transformerrootstackUserUserTableA7A02430StreamArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "UserTable",
+          "StreamArn"
+        ]
+      }
     }
   }
 }

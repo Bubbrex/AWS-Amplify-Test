@@ -1806,6 +1806,14 @@
           ]
         }
       }
+    },
+    "transformerrootstackItemItemTable2E83B534StreamArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ItemTable",
+          "StreamArn"
+        ]
+      }
     }
   }
 }

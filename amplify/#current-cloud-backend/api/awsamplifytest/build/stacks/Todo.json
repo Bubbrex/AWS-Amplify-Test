@@ -1457,6 +1457,14 @@
           ]
         }
       }
+    },
+    "transformerrootstackTodoTodoTableC67E79C2StreamArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "TodoTable",
+          "StreamArn"
+        ]
+      }
     }
   }
 }
