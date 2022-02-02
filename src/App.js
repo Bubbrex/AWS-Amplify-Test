@@ -18,7 +18,7 @@ function App() {
           <Route exact path="/about-yichao" component={ProfilePage} />
           <Route exact path="/login-page" component={LoginPage} />
           <Route exact path="/home" component={Components} />
-          <Redirect from="/" to="/home" />
+          <Redirect exact from="/" to="/home" />
         </Switch>
       </React.Fragment>
     </Router>
