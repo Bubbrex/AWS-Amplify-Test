@@ -168,12 +168,12 @@ export default function SectionCarousel() {
           <GridItem xs={12}>
             <div className={classes.typo}>
               <h5>
-                Check out the
-                <a href={portfolio} target="blank">
-                  {" "}
-                  portfolio{" "}
-                </a>
-                for more information about this project
+                {/* Check out the */}
+                <iframe src={portfolio} width="100%" height="600px">
+                  {/* {" "}
+                  portfolio{" "} */}
+                </iframe>
+                {/* for more information about this project */}
               </h5>
             </div>
           </GridItem>
