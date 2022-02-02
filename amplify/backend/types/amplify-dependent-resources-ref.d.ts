@@ -1,13 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
-    "api": {
-        "awsamplifytest": {
-            "GraphQLAPIKeyOutput": "string",
-            "GraphQLAPIIdOutput": "string",
-            "GraphQLAPIEndpointOutput": "string"
-        }
-    },
     "auth": {
-        "awsamplifytest5e07eab4": {
+        "awsamplifytestd182e505": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -15,12 +8,6 @@ export type AmplifyDependentResourcesAttributes = {
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
             "AppClientID": "string"
-        }
-    },
-    "storage": {
-        "yichaoStorage": {
-            "BucketName": "string",
-            "Region": "string"
         }
     }
 }

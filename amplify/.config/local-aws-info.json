@@ -1,7 +1,7 @@
 {
-  "dev": {
+  "main": {
     "configLevel": "project",
     "useProfile": true,
-    "profileName": "default"
+    "profileName": "portfolio"
   }
 }

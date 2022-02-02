@@ -1,23 +1,6 @@
 {
-  "api": {
-    "awsamplifytest": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
-            }
-          },
-          "additionalAuthenticationProviders": []
-        }
-      }
-    }
-  },
   "auth": {
-    "awsamplifytest5e07eab4": {
+    "awsamplifytestd182e505": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -40,13 +23,6 @@
           "EMAIL"
         ]
       }
-    }
-  },
-  "storage": {
-    "yichaoStorage": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
     }
   }
 }
