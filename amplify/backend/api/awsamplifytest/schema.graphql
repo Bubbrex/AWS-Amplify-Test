@@ -4,20 +4,20 @@ input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 }
 
-type Todo @model @searchable {
+type Todo @model {
   id: ID!
   name: String!
   description: String
 }
 
-type User @model @searchable {
+type User @model {
   id: ID!
   username: String!
   email: AWSEmail!
   createdAt: AWSDateTime!
 }
 
-type Item @model @searchable {
+type Item @model {
   orderId: ID! @primaryKey(sortKeyFields: ["amount"])
   status: Status!
   customerID: ID!

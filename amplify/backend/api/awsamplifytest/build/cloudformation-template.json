@@ -111,7 +111,7 @@
                         "ApiId"
                     ]
                 },
-                "Expires": 1642984506
+                "Expires": 1644375241
             }
         },
         "GraphQLAPINONEDS95A13CF0": {
@@ -338,79 +338,6 @@
                 "GraphQLAPITransformerSchema3CB2AE18"
             ]
         },
-        "SearchableStack": {
-            "Type": "AWS::CloudFormation::Stack",
-            "Properties": {
-                "TemplateURL": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "https://s3.",
-                            {
-                                "Ref": "AWS::Region"
-                            },
-                            ".",
-                            {
-                                "Ref": "AWS::URLSuffix"
-                            },
-                            "/",
-                            {
-                                "Ref": "S3DeploymentBucket"
-                            },
-                            "/",
-                            {
-                                "Ref": "S3DeploymentRootKey"
-                            },
-                            "/stacks/SearchableStack.json"
-                        ]
-                    ]
-                },
-                "Parameters": {
-                    "referencetotransformerrootstackenv10C5A902Ref": {
-                        "Ref": "env"
-                    },
-                    "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
-                        "Fn::GetAtt": [
-                            "GraphQLAPI",
-                            "ApiId"
-                        ]
-                    },
-                    "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoTodoTableC67E79C2StreamArn": {
-                        "Fn::GetAtt": [
-                            "Todo",
-                            "Outputs.transformerrootstackTodoTodoTableC67E79C2StreamArn"
-                        ]
-                    },
-                    "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserUserTableA7A02430StreamArn": {
-                        "Fn::GetAtt": [
-                            "User",
-                            "Outputs.transformerrootstackUserUserTableA7A02430StreamArn"
-                        ]
-                    },
-                    "referencetotransformerrootstackItemNestedStackItemNestedStackResource1B980173OutputstransformerrootstackItemItemTable2E83B534StreamArn": {
-                        "Fn::GetAtt": [
-                            "Item",
-                            "Outputs.transformerrootstackItemItemTable2E83B534StreamArn"
-                        ]
-                    },
-                    "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
-                        "Ref": "S3DeploymentRootKey"
-                    },
-                    "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
-                        "Ref": "S3DeploymentBucket"
-                    },
-                    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
-                        "Fn::GetAtt": [
-                            "GraphQLAPINONEDS95A13CF0",
-                            "Name"
-                        ]
-                    }
-                }
-            },
-            "DependsOn": [
-                "GraphQLAPITransformerSchema3CB2AE18"
-            ]
-        },
         "CustomResourcesjson": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
@@ -456,8 +383,7 @@
                 "GraphQLAPITransformerSchema3CB2AE18",
                 "Todo",
                 "User",
-                "Item",
-                "SearchableStack"
+                "Item"
             ]
         }
     },
