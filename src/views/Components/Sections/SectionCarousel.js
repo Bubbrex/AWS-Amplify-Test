@@ -12,7 +12,6 @@ import car1 from "assets/img/car1.png";
 import car2 from "assets/img/car2.png";
 import car3 from "assets/img/car3.png";
 import car4 from "assets/img/car4.png";
-
 import engine1 from "assets/img/engine1.jpg";
 import engine2 from "assets/img/engine2.jpg";
 import engine3 from "assets/img/engine3.jpg";
