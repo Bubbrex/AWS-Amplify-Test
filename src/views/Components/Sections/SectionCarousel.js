@@ -11,6 +11,8 @@ import cad2 from "assets/img/cad1.png";
 import car1 from "assets/img/car1.png";
 import car2 from "assets/img/car2.png";
 import car3 from "assets/img/car3.png";
+import car4 from "assets/img/car4.png";
+
 import engine1 from "assets/img/engine1.jpg";
 import engine2 from "assets/img/engine2.jpg";
 import engine3 from "assets/img/engine3.jpg";
@@ -258,6 +260,10 @@ export default function SectionCarousel() {
           <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
             <Card carousel>
               <Carousel {...settings}>
+                <div>
+                  <img src={car4} alt="First slide" className="slick-image" />
+                  <div className="slick-caption">{/* <h4>Front</h4> */}</div>
+                </div>
                 <div>
                   <img src={car1} alt="First slide" className="slick-image" />
                   <div className="slick-caption">{/* <h4>Front</h4> */}</div>
