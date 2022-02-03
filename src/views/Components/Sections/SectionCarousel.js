@@ -26,7 +26,7 @@ import motor1 from "assets/img/motor1.png";
 import motor2 from "assets/img/motor2.png";
 import motor3 from "assets/img/motor3.png";
 import motor4 from "assets/img/motor4.jpg";
-import portfolio from "../../../e-portfolio.pdf";
+import portfolio from "assets/e-portfolio.pdf";
 import sc1 from "assets/img/sc1.png";
 import sc2 from "assets/img/sc2.png";
 import sc3 from "assets/img/sc3.png";
