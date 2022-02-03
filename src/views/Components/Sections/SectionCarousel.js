@@ -6,6 +6,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import React from "react";
 import ReactPlayer from "react-player";
+import { Storage } from "aws-amplify";
 import cad1 from "assets/img/cad2.png";
 import cad2 from "assets/img/cad1.png";
 import car1 from "assets/img/car1.png";
@@ -26,16 +27,26 @@ import motor1 from "assets/img/motor1.png";
 import motor2 from "assets/img/motor2.png";
 import motor3 from "assets/img/motor3.png";
 import motor4 from "assets/img/motor4.jpg";
-import portfolio from "assets/e-portfolio.pdf";
+// import portfolio from "assets/e-portfolio.pdf";
 import sc1 from "assets/img/sc1.png";
 import sc2 from "assets/img/sc2.png";
 import sc3 from "assets/img/sc3.png";
 import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
-
 const useStyles = makeStyles(styles);
-
 export default function SectionCarousel() {
   const classes = useStyles();
+  const [portfolio, setPortfolio] = React.useState("");
+  React.useEffect(() => {
+    const getFile = async () => {
+      try {
+        const result = await Storage.get("e-portfolio.pdf");
+        setPortfolio(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getFile();
+  }, []);
   const settings = {
     dots: true,
     infinite: true,
@@ -168,12 +179,12 @@ export default function SectionCarousel() {
           <GridItem xs={12}>
             <div className={classes.typo}>
               <h5>
-                {/* Check out the */}
-                <iframe src={portfolio} width="100%" height="600px">
-                  {/* {" "}
-                  portfolio{" "} */}
-                </iframe>
-                {/* for more information about this project */}
+                Check out the
+                <a href={`${portfolio}`} target="blank">
+                  {" "}
+                  portfolio{" "}
+                </a>
+                for more information about this project
               </h5>
             </div>
           </GridItem>

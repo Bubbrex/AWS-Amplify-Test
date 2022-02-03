@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "awsamplifytestd182e505": {}
+        "awsamplifytestd182e505": {},
+        "true": {}
       }
     }
   }
