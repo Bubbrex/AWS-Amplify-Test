@@ -9,6 +9,7 @@ import ReactPlayer from "react-player";
 import { Storage } from "aws-amplify";
 import cad1 from "assets/img/cad2.png";
 import cad2 from "assets/img/cad1.png";
+import cad5 from "assets/img/cad5.png";
 import car1 from "assets/img/car1.png";
 import car2 from "assets/img/car2.png";
 import car3 from "assets/img/car3.png";
@@ -323,6 +324,20 @@ export default function SectionCarousel() {
           <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
             <Card carousel>
               <Carousel {...settings}>
+                <div>
+                  <img
+                    src={cad5}
+                    alt="First slide"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">{/* <h4>Front</h4> */}</div>
+                </div>
                 <div>
                   <img
                     src={cad1}
