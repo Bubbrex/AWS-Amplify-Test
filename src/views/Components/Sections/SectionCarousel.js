@@ -34,6 +34,7 @@ import sc1 from "assets/img/sc1.png";
 import sc2 from "assets/img/sc2.png";
 import sc3 from "assets/img/sc3.png";
 import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
+import wrx from "assets/img/wrx.png";
 
 const useStyles = makeStyles(styles);
 export default function SectionCarousel() {
@@ -273,6 +274,10 @@ export default function SectionCarousel() {
           <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
             <Card carousel>
               <Carousel {...settings}>
+                <div>
+                  <img src={wrx} alt="First slide" className="slick-image" />
+                  <div className="slick-caption">{/* <h4>Front</h4> */}</div>
+                </div>
                 <div>
                   <img src={car5} alt="First slide" className="slick-image" />
                   <div className="slick-caption">{/* <h4>Front</h4> */}</div>
