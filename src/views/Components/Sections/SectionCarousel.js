@@ -15,6 +15,9 @@ import car2 from "assets/img/car2.png";
 import car3 from "assets/img/car3.png";
 import car4 from "assets/img/car4.png";
 import car5 from "assets/img/car5.png";
+import cfd1 from "assets/img/cfd1.png";
+import cfd2 from "assets/img/cfd2.png";
+import cfd3 from "assets/img/cfd3.png";
 import engine1 from "assets/img/engine1.jpg";
 import engine2 from "assets/img/engine2.jpg";
 import engine3 from "assets/img/engine3.jpg";
@@ -40,11 +43,15 @@ const useStyles = makeStyles(styles);
 export default function SectionCarousel() {
   const classes = useStyles();
   const [portfolio, setPortfolio] = React.useState("");
+  const [cfd, setCfd] = React.useState("");
   React.useEffect(() => {
     const getFile = async () => {
       try {
         const result = await Storage.get("e-portfolio.pdf");
+        const result2 = await Storage.get("cfd_coursework.pdf");
+
         setPortfolio(result);
+        setCfd(result2);
       } catch (error) {
         console.log(error);
       }
@@ -266,7 +273,7 @@ export default function SectionCarousel() {
           <GridItem>
             <div className={classes.title}>
               <h2 className={classes.title}>
-                Surface Design of My Ideal Sports Car
+                Surface Design of My Ideal Sports Cars
               </h2>
               <h5>SEP 2018</h5>
             </div>
@@ -304,18 +311,98 @@ export default function SectionCarousel() {
           <GridItem xs={12} sm={12} md={4}>
             <div className={classes.typo}>
               <h5>
-                The project is basically a practice of
+                The left portfolio images demonstrated my strong knowledge of
+                using
                 <a
                   href="https://www.autodesk.co.uk/products/fusion-360/overview"
                   target="blank"
                 >
                   {" "}
-                  Fusion 360.{" "}
+                  Fusion 360{" "}
                 </a>
-                The whole surface design combined the idea of both aerodynamics
-                and fashion styling. Although for now, I am not capable of
-                fabricating it, I believe that someday in the near future, the
-                dream car would not be JUST a dream!
+                in vehicle appearance design. I am capable of following the
+                existing blue print (first image Subaru WRX STI) and design from
+                complete scratch (second and third images). More specifically,
+                the whole surface design in the second image combined the ideas
+                of both aerodynamics and fashion styling. Although for now, I am
+                not capable of fabricating it, I believe that someday in the
+                near future, the dream car would not be JUST a dream!
+              </h5>
+            </div>
+          </GridItem>
+
+          <GridItem>
+            <div className={classes.title}>
+              <h2 className={classes.title}>CFD Analysis of Intake Manifold</h2>
+              <h5>MAR 2021</h5>
+            </div>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
+            <Card carousel>
+              <Carousel {...settings}>
+                <div>
+                  <img
+                    src={cfd1}
+                    alt="First slide"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  {/* <div className="slick-caption">
+                    {<h4>Intake Velocity of 100 m/s</h4>}
+                  </div> */}
+                </div>
+                <div>
+                  <img
+                    src={cfd2}
+                    alt="First slide"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">{/* <h4>Front</h4> */}</div>
+                </div>
+                <div>
+                  <img
+                    src={cfd3}
+                    alt="Second slide"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">{/* <h4>Side</h4> */}</div>
+                </div>
+              </Carousel>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={4}>
+            <div className={classes.typo}>
+              <h5>
+                The first image showed one of the significant results generating
+                from the CFD analysis which was the velocity distribution at
+                each point across the entire intake manifold. It was shown that
+                the air at upper-right part of the manifold almost remained idle
+                even when the intake velocity rose to 100 m/s. Therefore, based
+                on this finding, the intake manifold had a substantial amount of
+                potential to improve. The following two images demonstrated the
+                validation results of the model. Check out the
+                <a href={`${cfd}`} target="blank">
+                  {" "}
+                  report{" "}
+                </a>
+                for more information about this CFD analysis project.
               </h5>
             </div>
           </GridItem>
