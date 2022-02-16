@@ -26,7 +26,7 @@ import engine4 from "assets/img/engine4.jpg";
 import image1 from "assets/img/efficiency1.png";
 import image2 from "assets/img/pressure using nhexane 1000RPM 0.75mol fueltot.png";
 import image3 from "assets/img/AHRR using nhexane 1000RPM 0.75mol fueltot.png";
-// @material-ui/core components
+// @material-ui/core componentsextensions used by the Tagged Image F
 import { makeStyles } from "@material-ui/core/styles";
 import motor1 from "assets/img/motor1.png";
 import motor2 from "assets/img/motor2.png";
