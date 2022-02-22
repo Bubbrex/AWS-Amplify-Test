@@ -22,6 +22,7 @@ import engine1 from "assets/img/engine1.jpg";
 import engine2 from "assets/img/engine2.jpg";
 import engine3 from "assets/img/engine3.jpg";
 import engine4 from "assets/img/engine4.jpg";
+import gear from "assets/img/gear.png";
 // @material-ui/icons
 import image1 from "assets/img/efficiency1.png";
 import image2 from "assets/img/pressure using nhexane 1000RPM 0.75mol fueltot.png";
@@ -37,6 +38,8 @@ import sc1 from "assets/img/sc1.png";
 import sc2 from "assets/img/sc2.png";
 import sc3 from "assets/img/sc3.png";
 import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
+import track from "assets/img/track.png";
+import vehicle from "assets/img/vehicle.png";
 import wrx from "assets/img/wrx.png";
 
 const useStyles = makeStyles(styles);
@@ -44,14 +47,18 @@ export default function SectionCarousel() {
   const classes = useStyles();
   const [portfolio, setPortfolio] = React.useState("");
   const [cfd, setCfd] = React.useState("");
+  const [vehicleP, setVehicleP] = React.useState("");
+
   React.useEffect(() => {
     const getFile = async () => {
       try {
         const result = await Storage.get("e-portfolio.pdf");
         const result2 = await Storage.get("cfd_coursework.pdf");
+        const result3 = await Storage.get("report.pdf");
 
         setPortfolio(result);
         setCfd(result2);
+        setVehicleP(result3);
       } catch (error) {
         console.log(error);
       }
@@ -186,7 +193,6 @@ export default function SectionCarousel() {
               <h5>Jan 2020</h5>
             </div>
           </GridItem>
-
           <GridItem xs={12}>
             <div className={classes.typo}>
               <h5>
@@ -199,6 +205,90 @@ export default function SectionCarousel() {
               </h5>
             </div>
           </GridItem>
+
+          <GridItem>
+            <div className={classes.title}>
+              <h2 className={classes.title}>
+                Formula 463 (Design Vehicle for Specific Track)
+              </h2>
+              <h5>Jan 2020</h5>
+            </div>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
+            <Card carousel>
+              <Carousel {...settings}>
+                <div>
+                  <img
+                    src={track}
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                    alt="First slide"
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">
+                    {/* <h4>Efficiency plot</h4> */}
+                  </div>
+                </div>
+                <div>
+                  <img
+                    src={vehicle}
+                    alt="Second slide"
+                    className="slick-image"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      width: "80%",
+                      left: "50%",
+                      transform: "translate(-50%)",
+                    }}
+                  />
+                  <div className="slick-caption">
+                    {/* <h4>Pressure plot</h4> */}
+                  </div>
+                </div>
+                <div>
+                  <img
+                    src={gear}
+                    alt="Third slide"
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      left: "50%",
+                      width: "80%",
+                      transform: "translate(-50%)",
+                    }}
+                    className="slick-image"
+                  />
+                  <div className="slick-caption">
+                    {/* <h4>AHRR plot</h4> */}
+                  </div>
+                </div>
+              </Carousel>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={4}>
+            <div className={classes.typo}>
+              <h5>
+                This project was one of my favorite projects. The aim is to
+                design the virtual vehicle such that in the specific track, it
+                would achieve a fast lap time. The design included suspension
+                geometry, front and rear axle dimensions, suspension stiffness,
+                gearbox, and etc. Although the whole project was based on
+                simulation, the process of testing and thoughts behind the
+                numbers were meaningful and fascinating. Please check out the
+                <a href={`${vehicleP}`} target="blank">
+                  {" "}
+                  report{" "}
+                </a>
+                for more detail information about the project.
+              </h5>
+            </div>
+          </GridItem>
+
           <GridItem>
             <div className={classes.title}>
               <h2 className={classes.title}>UWCSSA Community Website Design</h2>
